@@ -1,4 +1,3 @@
-
 package logic;
 
 import java.util.Date;
@@ -15,8 +14,8 @@ public class Dentist extends Person {
     public Dentist() {
     }
 
-    public Dentist(int id_dentist, String speciality, List<Shift> ShiftList, User aUser, Schedule aSchedule, String ID, String name, String last_name, String phone, String address, Date dob) {
-        super(ID, name, last_name, phone, address, dob);
+    public Dentist(int id_dentist, String speciality, List<Shift> ShiftList, User aUser, Schedule aSchedule, int id, String identification, String name, String last_name, String phone, String address, Date dob) {
+        super(id, identification, name, last_name, phone, address, dob);
         this.id_dentist = id_dentist;
         this.speciality = speciality;
         this.ShiftList = ShiftList;

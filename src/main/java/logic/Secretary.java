@@ -12,8 +12,8 @@ public class Secretary extends Person{
     public Secretary() {
     }
 
-    public Secretary(int id_secretary, String area, User anUser, String ID, String name, String last_name, String phone, String address, Date dob) {
-        super(ID, name, last_name, phone, address, dob);
+    public Secretary(int id_secretary, String area, User anUser, int id, String identification, String name, String last_name, String phone, String address, Date dob) {
+        super(id, identification, name, last_name, phone, address, dob);
         this.id_secretary = id_secretary;
         this.area = area;
         this.anUser = anUser;

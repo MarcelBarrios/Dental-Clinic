@@ -2,15 +2,18 @@ package logic;
 import java.util.Date;
 
 public class Person {
-    private String ID;
+    
+    private int id;
+    private String identification;
     private String name;
     private String last_name;
     private String phone;
     private String address;
     private Date dob;
 
-    public Person(String ID, String name, String last_name, String phone, String address, Date dob) {
-        this.ID = ID;
+    public Person(int id, String identification, String name, String last_name, String phone, String address, Date dob) {
+        this.id = id;
+        this.identification = identification;
         this.name = name;
         this.last_name = last_name;
         this.phone = phone;
@@ -21,12 +24,20 @@ public class Person {
     public Person() {
     }
 
-    public String getID() {
-        return ID;
+    public int getId() {
+        return id;
     }
 
-    public void setID(String ID) {
-        this.ID = ID;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getIdentification() {
+        return identification;
+    }
+
+    public void setIdentification(String identification) {
+        this.identification = identification;
     }
 
     public String getName() {
@@ -68,6 +79,8 @@ public class Person {
     public void setDob(Date dob) {
         this.dob = dob;
     }
+
+    
     
     
 }

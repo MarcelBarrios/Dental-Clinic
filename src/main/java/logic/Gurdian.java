@@ -11,8 +11,8 @@ public class Gurdian extends Person{
     public Gurdian() {
     }
 
-    public Gurdian(int urdian, String gurdian_type, String ID, String name, String last_name, String phone, String address, Date dob) {
-        super(ID, name, last_name, phone, address, dob);
+    public Gurdian(int urdian, String gurdian_type, int id, String identification, String name, String last_name, String phone, String address, Date dob) {
+        super(id, identification, name, last_name, phone, address, dob);
         this.urdian = urdian;
         this.gurdian_type = gurdian_type;
     }
