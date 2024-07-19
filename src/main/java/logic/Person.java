@@ -1,14 +1,29 @@
 package logic;
+import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-public class Person {
+@Entity
+@Inheritance (strategy=InheritanceType.TABLE_PER_CLASS)
+public class Person implements Serializable {
     
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
     private String identification;
     private String name;
     private String last_name;
     private String phone;
     private String address;
+    
+    @Temporal(TemporalType.DATE)
     private Date dob;
 
     public Person(int id, String identification, String name, String last_name, String phone, String address, Date dob) {
