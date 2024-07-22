@@ -25,11 +25,11 @@ public class Shift implements Serializable {
     private String condition;
     
     @ManyToOne
-    @JoinColumn(name="id_shift")
+    @JoinColumn(name="id_dentist")
     private Dentist dentis;
     
     @ManyToOne
-    @JoinColumn(name="id_shift2")
+    @JoinColumn(name="id_patient")
     private Patient patien;
 
     public Shift() {

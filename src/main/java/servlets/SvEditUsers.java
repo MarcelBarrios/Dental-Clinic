@@ -2,9 +2,6 @@
 package servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,45 +11,50 @@ import javax.servlet.http.HttpSession;
 import logic.Controller;
 import logic.User;
 
-@WebServlet(name = "SvUsers", urlPatterns = {"/SvUsers"})
-public class SvUsers extends HttpServlet {
+@WebServlet(name = "SvEditUsers", urlPatterns = {"/SvEditUsers"})
+public class SvEditUsers extends HttpServlet {
     
     Controller control = new Controller();
+
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
     }
 
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        processRequest(request, response);
-        List<User> usersList = new ArrayList<User>();
 
-        usersList = control.getUsers();
+        int id = Integer.parseInt(request.getParameter("id"));
+        
+        User use = control.getUser(id);
         
         HttpSession mySession = request.getSession();
-        mySession.setAttribute("usersList", usersList);
+        mySession.setAttribute("useEdit", use);
         
-        System.out.println("User: " + usersList.get(0));
+        System.out.println("The user is: " + use.getUser_name());
         
-        response.sendRedirect("seeUsers.jsp");
+        response.sendRedirect("editUsers.jsp");
+
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        processRequest(request, response);
+
         String userName = request.getParameter("userName");
-        String pass = request.getParameter("password");
-        String role = request.getParameter("role");
+        String password = request.getParameter("password");
+        String role = request.getParameter("role");        
         
-        control.createUser(userName, pass, role);
+        User use = (User) request.getSession().getAttribute("useEdit");
+        use.setUser_name(userName);
+        use.setPassword(password);
+        use.setRole(role);
         
-        response.sendRedirect("index.jsp");
-    
+        control.editUser(use);
+        
+        response.sendRedirect("SvUsers");
     }
 
     @Override
