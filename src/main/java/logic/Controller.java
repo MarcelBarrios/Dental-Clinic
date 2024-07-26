@@ -35,4 +35,24 @@ public class Controller {
     public void editUser(User user) {
         persisControl.editUser(user);
     }
+
+    public boolean validateLogin(String user, String password) {
+        
+        boolean login = false;
+        
+        List<User> userList = new ArrayList<User>();
+        userList = persisControl.getUsers();
+        
+        for(User use : userList) {
+            if(use.getUser_name().equals(user)){
+                if(use.getPassword().equals(password)) {
+                    login = true;
+                }
+                else {
+                    login = false;
+                }
+            }
+        }
+        return login;
+    }
 }

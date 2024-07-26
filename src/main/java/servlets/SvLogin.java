@@ -2,6 +2,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,10 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import logic.Controller;
-import logic.User;
 
-@WebServlet(name = "SvEditUsers", urlPatterns = {"/SvEditUsers"})
-public class SvEditUsers extends HttpServlet {
+@WebServlet(name = "SvLogin", urlPatterns = {"/SvLogin"})
+public class SvLogin extends HttpServlet {
     
     Controller control = new Controller();
 
@@ -24,36 +24,28 @@ public class SvEditUsers extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        int id = Integer.parseInt(request.getParameter("id"));
-        
-        User use = control.getUser(id);
-        
-        HttpSession mySession = request.getSession();
-        mySession.setAttribute("useEdit", use);
-        
-        System.out.println("The user is: " + use.getUser_name());
-        
-        response.sendRedirect("editUsers.jsp");
-
+        processRequest(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        String userName = request.getParameter("userName");
+            
+        String user = request.getParameter("user");
         String password = request.getParameter("password");
-        String role = request.getParameter("role");        
         
-        User use = (User) request.getSession().getAttribute("useEdit");
-        use.setUser_name(userName);
-        use.setPassword(password);
-        use.setRole(role);
+        boolean validation = false;
+        validation = control.validateLogin(user, password);
         
-        control.editUser(use);
+        if(validation == true) {
+            HttpSession mySession = request.getSession(true);
+            mySession.setAttribute("user", user);
+            response.sendRedirect("index.jsp");
+        } else{
+            response.sendRedirect("loginError.jsp");
+        }
         
-        response.sendRedirect("SvUsers");
+
     }
 
     @Override
